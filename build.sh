@@ -1,1 +1,1 @@
-docker build -t chankov/dbtrac-mysql-ssh .
+docker build -t chankov/mysql-ssh .
