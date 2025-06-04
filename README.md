@@ -9,3 +9,6 @@ To build the image run the following command in the root of the repository:
 ```bash
 ./build.sh
 ```
+
+DO NOT RUN THIS IMAGE IN PRODUCTION. IT IS FOR TESTING PURPOSES ONLY. As it has hardcoded passwords. 
+Seriously, don't do it!

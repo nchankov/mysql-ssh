@@ -1,0 +1,53 @@
+services:
+   ###
+   # Mysql Replica Creator test env
+   ###
+   ddb1:
+      container_name: ddb1
+      image: chankov/mysql-ssh
+      ports:
+         - "2221:22"
+         - "4441:3306"
+      environment:
+         MYSQL_ROOT_PASSWORD: 11top
+         MYSQL_SERVER_ID: 1
+      volumes:
+       - ./databases/db1/conf.d:/etc/mysql/conf.d
+       - ./databases/db1/mysql.conf.d:/etc/mysql/mysql.conf.d/
+       - ./mysql-replica-creator:/script
+   ddb2:
+      container_name: ddb2
+      image: chankov/mysql-ssh
+      ports:
+         - "2222:22"
+         - "4442:3306"
+      environment:
+         MYSQL_ROOT_PASSWORD: 11top
+         MYSQL_SERVER_ID: 2
+      volumes:
+       - ./databases/db1/conf.d:/etc/mysql/conf.d
+       - ./databases/db1/mysql.conf.d:/etc/mysql/mysql.conf.d/
+       - ./mysql-replica-creator:/script
+   ddb3:
+      container_name: ddb3
+      image: chankov/mysql-ssh
+      ports:
+         - "2223:22"
+         - "4443:3306"
+      environment:
+         MYSQL_ROOT_PASSWORD: 11top
+         MYSQL_SERVER_ID: 3
+      volumes:
+       - ./databases/db1/conf.d:/etc/mysql/conf.d
+       - ./databases/db1/mysql.conf.d:/etc/mysql/mysql.conf.d/
+       - ./mysql-replica-creator:/script
+   phpmyadmin:
+      container_name: dpma
+      image: phpmyadmin
+      ports:
+       - 6062:80
+      environment:
+       - PMA_HOSTS=192.168.0.10:4441,192.168.0.10:4442,192.168.0.10:4443
+networks:
+  docker-network:
+    driver: bridge
